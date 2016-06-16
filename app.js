@@ -49,9 +49,12 @@ io.on('connection', function(socket) {
 	console.log(address);
 
 	socket.on('clicked', function(data) {
-		console.log('======================'+data.winnerID)
 		console.log(photolist.photolist[data.winnerID])
 		elo.competition(photolist.photolist[data.winnerID], photolist.photolist[data.loserID], 1);
+
+		var winner = (data.photoToChange == 'A') ? 'B' : 'A';
+		socket.emit('set photo ' + winner, photolist.photolist[data.winnerID]);
+
 		socket.emit('set photo ' + data.photoToChange, (function() {
 			photo = photolist.getRandomPhoto();
 

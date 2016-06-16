@@ -4,11 +4,10 @@ exports.defineKFactor = function(k) {
 	k_factor = k;
 }
 
-exports.expectedScore = function(Ra, Rb) {
-	return 1 / (1 + Math.pow(10, (Ra - Rb)/400));
-}
-
 exports.competition = function(photoA, photoB, scoreA) { 
+	function expectedScore(Ra, Rb) {
+		return 1 / (1 + Math.pow(10, (Ra - Rb)/400));
+	}
 	// scoreA = If a wins: 1, loss: 0
 	var scoreB = 1 - scoreA;
 

@@ -21,22 +21,15 @@ function setPhoto(photoName, photo) {
 }
 
 socket.on('set photo A', function(photo) {
-	alert('set a');
 	setPhoto('A', photo);
 });
 
 socket.on('set photo B', function(photo) {
-	alert('set B');
 	setPhoto('B', photo);
 });
 
 function photoWin(winner) {
 	var loser = (winner == 'A') ? 'B' : 'A';
-	console.log({
-		photoToChange: loser,
-		winnerID: ids[winner].innerHTML,
-		loserID: ids[loser].innerHTML
-	});
 	socket.emit('clicked', {
 		photoToChange: loser,
 		winnerID: ids[winner].innerHTML,
