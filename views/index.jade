@@ -1,13 +1,17 @@
 html
 	head
 		link(href='/stylesheets/style.css', rel='stylesheet')
+		script(src='/socket.io/socket.io.js')
 	body 
 		
 		h1 ELOMASH
 		p  Click on your favourite TV series : 
 		#photo1
-			a: img(src=photoA.url width="300" height="300")/
-			h2 #{photoA.rating}
+			img(id="photoA" src=photoA.url width="300" height="300" onclick="photoWin('A')")/
+			h2#photoAheading #{photoA.rating}
+			h2#photoAid #{photoA.id}
 		#photo2
-			a: img(src=photoB.url width="300" height="300")/ 
-			h2 #{photoB.rating}
+			img(id="photoB" src=photoB.url width="300" height="300" onclick="photoWin('B')")/ 
+			h2#photoBheading #{photoB.rating}
+			h2#photoBid #{photoB.id}
+		script(src='/javascripts/index.js')

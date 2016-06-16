@@ -6,6 +6,15 @@ var photolist = [
 	},
 	{
 		name: 'def.jpg'
+	},
+	{
+		name: 'efg.jpg'
+	},
+	{
+		name: 'jkl.jpg'
+	},
+	{
+		name: 'mno.jpg'
 	}
 ];
 

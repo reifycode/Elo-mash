@@ -1,4 +1,5 @@
 var express = require('express');
+var app = express();
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -6,9 +7,14 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
 
-var app = express();
+var http = require('http')
+var server = http.createServer(app);
+var io = require('socket.io')();
+
+var elo = require('./elo.js');
+var photolist = require('./photolist.js');
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,8 +28,41 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
+app.get('/', function(req, res){
+	res.render('index', (function() {
+		photoA = photolist.getRandomPhoto();
+		photoB = photolist.getRandomPhoto();
+
+		while(photoB.id == photoA.id) {
+			photoB = photolist.getRandomPhoto();
+		}
+
+		return {
+			photoA: photoA,
+			photoB: photoB
+		};
+	})());
+});
+
+io.on('connection', function(socket) {
+	var address = socket.request.connection.remoteAddress;
+	console.log(address);
+
+	socket.on('clicked', function(data) {
+		console.log('======================'+data.winnerID)
+		console.log(photolist.photolist[data.winnerID])
+		elo.competition(photolist.photolist[data.winnerID], photolist.photolist[data.loserID], 1);
+		socket.emit('set photo ' + data.photoToChange, (function() {
+			photo = photolist.getRandomPhoto();
+
+			while(photo.id == data.winnerID || photo.id == data.loserID) {
+				photo = photolist.getRandomPhoto();
+			}
+
+			return photo;
+		})());
+	});
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -43,8 +82,10 @@ app.use(function(err, req, res, next) {
   });
 });
 
-app.listen(4000, function () {
-  console.log('Listening on port 4000!');
+// app.listen(3000, function() {})
+server.listen(4000, function() {
+	console.log('yo');
 });
+io.listen(server);
 
 module.exports = app;
