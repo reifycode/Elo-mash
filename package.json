@@ -1,0 +1,22 @@
+{
+  "name": "elo-mash",
+  "version": "0.0.0",
+  "description": "Elo!",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thepulkitagarwal/Elo-mash.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thepulkitagarwal/Elo-mash/issues"
+  },
+  "homepage": "https://github.com/thepulkitagarwal/Elo-mash#readme",
+  "devDependencies": {
+    "express": "^4.13.4"
+  }
+}
