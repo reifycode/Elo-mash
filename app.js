@@ -46,3 +46,5 @@ app.use(function(err, req, res, next) {
 app.listen(4000, function () {
   console.log('Listening on port 4000!');
 });
+
+module.exports = app;
