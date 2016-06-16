@@ -1,8 +1,21 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+h1{
+	color:White;
+	       font-family:  Vecta;
+	     background: repeating-linear-gradient(
+  45deg,
+  #606dbc,
+  #606dbc 10px,
+  #465298 10px,
+  #465298 20px
+);
+	   background-size: 150% 100px; 
+	   text-align : center;
 }
 
-a {
-  color: #00B7FF;
+p
+{
+	text-align : center;
+	font-weight: bold;
+	font-family:  Vecta;
+	font-size: 150%;
 }
