@@ -5,14 +5,14 @@ exports.defineKFactor = function(k) {
 }
 
 exports.competition = function(photoA, photoB, scoreA) { 
-	function expectedScore(Ra, Rb) {
-		return 1 / (1 + Math.pow(10, (Ra - Rb)/400));
+	function expectedScore(R1, R2) {
+		return 1 / (1 + Math.pow(10, (R2 - R1)/400));
 	}
 	// scoreA = If a wins: 1, loss: 0
 	var scoreB = 1 - scoreA;
 
-	Ra = photoA.rating + k_factor * (scoreA - expectedScore(photoA.rating, photoB.rating));
-	Rb = photoB.rating + k_factor * (scoreB - expectedScore(photoB.rating, photoA.rating));
+	var Ra = photoA.rating + k_factor * (scoreA - expectedScore(photoA.rating, photoB.rating));
+	var Rb = photoB.rating + k_factor * (scoreB - expectedScore(photoB.rating, photoA.rating));
 
 	photoA.rating = Ra;
 	photoB.rating = Rb;
