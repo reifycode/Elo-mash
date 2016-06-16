@@ -6,6 +6,4 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Yash' });
 });
 
-console.log('yolo');
-
 module.exports = router;
