@@ -47,11 +47,11 @@ io.on('connection', function(socket) {
 	console.log(address);
 
 	socket.on('clicked', function(data) {
-		console.log(photolist.photolist[data.winnerID])
-		elo.competition(photolist.photolist[data.winnerID], photolist.photolist[data.loserID], 1);
+		console.log(photolist.getPhotoByID(data.winnerID))
+		elo.competition(photolist.getPhotoByID(data.winnerID), photolist.getPhotoByID(data.loserID), 1);
 
 		var winner = (data.photoToChange == 'A') ? 'B' : 'A';
-		socket.emit('set photo ' + winner, photolist.photolist[data.winnerID]);
+		socket.emit('set photo ' + winner, photolist.getPhotoByID(data.winnerID));
 
 		socket.emit('set photo ' + data.photoToChange, (function() {
 			photo = photolist.getRandomPhoto();
@@ -85,7 +85,7 @@ app.use(function(err, req, res, next) {
 
 // app.listen(3000, function() {})
 server.listen(4000, function() {
-	console.log('yo');
+	console.log('Started at port :4000.');
 });
 io.listen(server);
 

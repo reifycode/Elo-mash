@@ -1,3 +1,5 @@
+// will (should) be replaced by a proper database
+
 photosBasePath = '/images/'
 
 var photolist = [
@@ -28,4 +30,6 @@ exports.getRandomPhoto = function() {
 	return photolist[Math.floor(Math.random() * photolist.length)];
 }
 
-exports.photolist = photolist;
+exports.getPhotoByID = function(id) {
+	return photolist[id];
+}
